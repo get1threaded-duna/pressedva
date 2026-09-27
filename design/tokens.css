@@ -1,0 +1,125 @@
+/* =============================================================
+   design/tokens.css
+   The contract. Every visual value on pressedva.com resolves here.
+   If a component needs a value that isn't in this file, the value
+   gets added here first. It never gets inlined.
+
+   PRODUCT:    PRESSED — Rappahannock Dreamer's Bar (pressedva.com)
+   AUDIENCE:   Stafford/Fredericksburg parents planning a party, and
+               coaches, schools and small businesses ordering crew gear.
+   PAGE JOB:   Turn a visitor into a party booking or a crew quote.
+
+   SIGNATURE:  The press. A 3D trucker hat, tee and press-on nail float
+               in front of a giant PRESSED wordmark; tap one and it gets
+               heat-pressed flat, then springs back.
+
+   RISK TAKEN: Lipstick magenta and forest green as the only two colors,
+               on a warm chalk ground. No neutral grey anywhere.
+   ============================================================= */
+
+:root {
+  /* --- Color: named for PRESSED's world ------------------------ */
+  --chalk:    #fff8f6;  /* page ground, like a fresh white blank */
+  --blush:    #fce5df;  /* soft wash, pills, quiet panels */
+  --bubble:   #f29ebd;  /* faded echo type, accents on dark */
+  --lipstick: #db3c8a;  /* the brand pink: display type only (large) */
+  --berry:    #b02a6c;  /* pink that is safe for text and buttons */
+  --forest:   #00522d;  /* body text, primary action */
+  --pine:     #003a20;  /* deepest ground, footer */
+  --moss:     #3e6a53;  /* secondary text on chalk */
+
+  /* Semantic aliases: components reference these */
+  --text-primary:   var(--forest);
+  --text-secondary: var(--moss);
+  --text-on-dark:   var(--chalk);
+  --bg-base:        var(--chalk);
+  --bg-raised:      var(--blush);
+  --bg-dark:        var(--forest);
+  --bg-deep:        var(--pine);
+  --border-default: var(--bubble);
+  --border-strong:  var(--forest);
+  --action:         var(--forest);
+  --action-text:    var(--chalk);
+  --accent:         var(--lipstick);
+  --accent-text:    var(--berry);
+
+  --success: var(--forest);
+  --danger:  #a3123f;
+
+  /* --- Type ---------------------------------------------------- */
+  --font-display: 'Anton', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+  --font-body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Marketing scale, ratio ~1.333 */
+  --text-xs:   0.8125rem;
+  --text-sm:   0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg:   1.3125rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  clamp(2.25rem, 7vw, 3.5rem);
+  --text-3xl:  clamp(3.25rem, 12vw, 6.5rem);
+  --text-hero: clamp(5.5rem, 26vw, 17rem);
+  --text-footer: clamp(3.5rem, 16vw, 11rem);
+
+  --leading-display: 0.92;
+  --leading-tight:   1.15;
+  --leading-body:    1.55;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+
+  --tracking-display: 0;
+  --tracking-caps:    0.1em;
+
+  /* --- Space --------------------------------------------------- */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --gutter:   clamp(1rem, 4vw, 3rem);
+
+  /* --- Form ---------------------------------------------------- */
+  --radius-sm:   0.625rem;
+  --radius-md:   1.25rem;
+  --radius-lg:   1.75rem;
+  --radius-full: 9999px;
+  --border-width: 2px;
+  --shadow-raised:  0 1.25rem 2.5rem -1.5rem rgb(0 58 32 / 0.35);
+  --shadow-overlay: 0 2rem 4rem -1rem rgb(0 58 32 / 0.45);
+
+  /* --- Motion -------------------------------------------------- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Layout -------------------------------------------------- */
+  --content-max: 62ch;
+  --page-max: 1240px;
+  --touch-min: 44px;
+}
+
+/* Quality floor. Not optional, not announced. */
+*:focus-visible {
+  outline: 3px solid var(--berry);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Single deliberate light look (brand). No dark mode by design:
+   the chalk/pink/green palette IS the brand, like a printed tag. */

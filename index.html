@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PRESSED — Rappahannock Dreamer's Bar</title>
+<meta name="description" content="Press-on nail kits, custom tees and hats made in front of you. Parties and crew orders in Stafford and Fredericksburg, VA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="design/tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg-base);color:var(--text-primary);font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-body);overflow-x:hidden}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.wrap{width:100%;max-width:var(--page-max);margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase}
+.display{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;line-height:var(--leading-display);letter-spacing:var(--tracking-display);text-wrap:balance}
+.lede{font-size:var(--text-lg);line-height:var(--leading-tight);max-width:var(--content-max)}
+.muted{color:var(--text-secondary)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:var(--touch-min);padding:var(--space-3) var(--space-6);border-radius:var(--radius-sm);border:var(--border-width) solid var(--action);background:var(--action);color:var(--action-text);font:var(--weight-bold) var(--text-base)/1 var(--font-body);text-decoration:none;cursor:pointer;transition:transform var(--duration-fast) var(--ease-out),background var(--duration-base) var(--ease-out)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn.ghost{background:transparent;color:var(--accent-text);border-color:var(--accent-text)}
+.btn.pink{background:var(--berry);border-color:var(--berry);color:var(--chalk)}
+.btn.light{background:var(--chalk);border-color:var(--chalk);color:var(--forest)}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:var(--bg-base);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}
+.mark{display:flex;align-items:center;gap:var(--space-3);text-decoration:none}
+.bolt{width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-full);background:var(--accent);display:grid;place-items:center;color:var(--chalk);flex:none}
+.mark b{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--text-lg);letter-spacing:.02em}
+.nav{display:flex;align-items:center;gap:var(--space-6);font-weight:var(--weight-medium)}
+.nav a{text-decoration:none;padding-block:var(--space-2)}
+.nav a:not(.btn):hover{color:var(--accent-text);text-decoration:underline;text-underline-offset:.3em}
+@media (max-width:760px){.nav a:not(.btn){display:none}}
+
+/* Hero */
+.hero{position:relative}
+.stage{position:relative;height:clamp(24rem,64svh,42rem);overflow:hidden}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;touch-action:pan-y;cursor:pointer}
+.word{position:absolute;left:0;right:0;bottom:0;z-index:1;font-size:var(--text-hero);color:var(--accent);text-align:center;line-height:.8;white-space:nowrap;pointer-events:none;transform:translateY(.06em)}
+.word span{display:inline-block}
+.hint{position:absolute;right:var(--gutter);top:var(--space-4);z-index:3;display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--accent-text);background:var(--bg-raised);padding:var(--space-2) var(--space-3);border-radius:var(--radius-full);pointer-events:none;transition:opacity var(--duration-slow) var(--ease-out)}
+.hint.gone{opacity:0}
+.intro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--space-8);align-items:end;padding-block:var(--space-8) var(--space-12)}
+.intro .ctas{display:flex;flex-wrap:wrap;gap:var(--space-3);justify-content:flex-end}
+.pills{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-4)}
+.pill{font-size:var(--text-xs);font-weight:var(--weight-medium);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);background:var(--bg-raised)}
+@media (max-width:760px){.intro{grid-template-columns:minmax(0,1fr);gap:var(--space-6)}.intro .ctas{justify-content:flex-start}.intro .ctas .btn{flex:1 1 12rem}}
+
+/* Marquee */
+.marquee{background:var(--bg-dark);color:var(--text-on-dark);overflow:hidden;border-block:var(--border-width) solid var(--pine)}
+.track{display:flex;width:max-content;animation:slide 26s linear infinite}
+.track span{font-family:var(--font-display);text-transform:uppercase;font-size:var(--text-xl);padding:var(--space-3) var(--space-6);white-space:nowrap}
+.track i{color:var(--bubble);font-style:normal}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Sections */
+section.block{padding-block:var(--space-24)}
+.head{display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-12)}
+.head h2{font-size:var(--text-3xl);color:var(--accent)}
+.echo{color:var(--bg-raised)}
+
+/* Parties */
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6);margin-bottom:var(--space-16)}
+@media (max-width:900px){.packs{grid-template-columns:minmax(0,1fr)}}
+.pack{position:relative;display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-8);border-radius:var(--radius-lg);background:var(--bg-raised);transform-style:preserve-3d;transition:transform var(--duration-slow) var(--ease-out),box-shadow var(--duration-slow) var(--ease-out);will-change:transform}
+.pack:hover{box-shadow:var(--shadow-raised)}
+.pack.star{background:var(--bg-dark);color:var(--text-on-dark)}
+.pack h3{font-size:var(--text-2xl);color:var(--accent)}
+.pack.star h3{color:var(--bubble)}
+.pack ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--space-2)}
+.pack li{display:flex;gap:var(--space-2);align-items:baseline}
+.pack li::before{content:"";flex:none;width:.5em;height:.5em;border-radius:var(--radius-full);background:var(--accent);transform:translateY(-.1em)}
+.pack.star li::before{background:var(--bubble)}
+.price{font-family:var(--font-display);font-size:var(--text-xl);margin-top:auto}
+.flag{position:absolute;top:var(--space-4);right:var(--space-4);font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;background:var(--bubble);color:var(--forest);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full)}
+
+/* Forms */
+.formcard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--space-12);padding:clamp(1.5rem,5vw,4rem);border-radius:var(--radius-lg);border:var(--border-width) solid var(--border-strong)}
+@media (max-width:900px){.formcard{grid-template-columns:minmax(0,1fr);gap:var(--space-8)}}
+.formcard h3{font-size:var(--text-2xl);color:var(--accent)}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4) var(--space-6)}
+@media (max-width:560px){form{grid-template-columns:minmax(0,1fr)}}
+.field{display:flex;flex-direction:column;gap:var(--space-1)}
+.field.full{grid-column:1/-1}
+label,.legend{font-size:var(--text-sm);font-weight:var(--weight-bold)}
+input,select,textarea{font:inherit;font-size:var(--text-base);color:var(--text-primary);background:var(--bg-base);border:var(--border-width) solid var(--moss);border-radius:var(--radius-sm);padding:var(--space-3);min-height:var(--touch-min);width:100%}
+textarea{min-height:6rem;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:var(--berry)}
+.checks{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-flex;align-items:center;min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:var(--border-width) solid var(--moss);font-weight:var(--weight-medium);cursor:pointer;user-select:none}
+.chip input:checked+span{background:var(--forest);border-color:var(--forest);color:var(--chalk)}
+.chip input:focus-visible+span{outline:3px solid var(--berry);outline-offset:3px}
+.err{color:var(--danger);font-size:var(--text-sm);font-weight:var(--weight-medium)}
+.form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;justify-content:space-between}
+.small{font-size:var(--text-sm)}
+.done{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-8);border-radius:var(--radius-md);background:var(--bg-raised)}
+.done h4{margin:0;font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:var(--text-xl);color:var(--accent-text)}
+.copyrow{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.addr{font-weight:var(--weight-bold);user-select:all}
+
+/* Crew */
+.crew{background:var(--bg-dark);color:var(--text-on-dark)}
+.crew .head h2{color:var(--bubble)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6);margin:0 0 var(--space-16);padding:0;list-style:none;counter-reset:s}
+@media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-4);border-top:var(--border-width) solid var(--bubble)}
+.steps li::before{content:counter(s);font-family:var(--font-display);font-size:var(--text-2xl);line-height:1;color:var(--bubble)}
+.steps b{font-size:var(--text-lg)}
+.crew .formcard{border-color:var(--bubble)}
+.crew .formcard h3{color:var(--bubble)}
+.crew input,.crew select,.crew textarea{background:var(--pine);color:var(--chalk);border-color:var(--bubble)}
+.crew .chip span{border-color:var(--bubble)}
+.crew .chip input:checked+span{background:var(--bubble);border-color:var(--bubble);color:var(--forest)}
+.crew .done{background:var(--pine)}
+.crew .done h4{color:var(--bubble)}
+.crew .err{color:var(--bubble)}
+.crew .muted{color:var(--blush)}
+
+/* Bars */
+.bars{display:flex;flex-direction:column}
+.barrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-8);align-items:end;padding-block:var(--space-12);border-top:var(--border-width) solid var(--border-default)}
+.barrow:last-child{border-bottom:var(--border-width) solid var(--border-default)}
+.barrow .display{font-size:var(--text-3xl);color:var(--accent)}
+.barrow p{max-width:44ch}
+@media (max-width:760px){.barrow{grid-template-columns:minmax(0,1fr);gap:var(--space-4)}}
+
+/* Drop */
+.drop{background:var(--berry);color:var(--chalk)}
+.drop .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--space-8);align-items:end}
+.drop h2{font-size:var(--text-3xl)}
+.drop form{grid-template-columns:minmax(0,1fr) auto;align-items:end}
+.drop input{border-color:var(--chalk)}
+.drop .done{background:var(--chalk);color:var(--forest)}
+@media (max-width:760px){.drop .wrap{grid-template-columns:minmax(0,1fr)}.drop form{grid-template-columns:minmax(0,1fr)}}
+
+/* Find */
+.dates{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.dates li{display:grid;grid-template-columns:8rem minmax(0,1fr) auto;gap:var(--space-6);align-items:baseline;padding-block:var(--space-6);border-top:var(--border-width) solid var(--border-default)}
+.dates li:last-child{border-bottom:var(--border-width) solid var(--border-default)}
+.dates .d{font-family:var(--font-display);font-size:var(--text-xl);color:var(--accent-text);font-variant-numeric:tabular-nums}
+.dates .w{font-weight:var(--weight-bold);font-size:var(--text-lg)}
+@media (max-width:560px){.dates li{grid-template-columns:minmax(0,1fr);gap:var(--space-1)}}
+
+/* Footer */
+footer{background:var(--bg-deep);color:var(--text-on-dark);padding-block:var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom,0px))}
+footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--leading-display)}
+footer .cols{display:flex;flex-wrap:wrap;gap:var(--space-8);justify-content:space-between;margin-top:var(--space-8)}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+.copybtn{min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:var(--border-width) solid currentColor;background:transparent;color:inherit;font:inherit;font-weight:var(--weight-bold);cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.reveal{transition:opacity var(--duration-slow) var(--ease-out),transform var(--duration-slow) var(--ease-out)}
+.js .reveal.pre{opacity:.001;transform:translateY(1.5rem)}
+@media (prefers-reduced-motion:reduce){.track{animation:none}.js .reveal.pre{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="PRESSED home">
+      <span class="bolt" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+      <b>PRESSED</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#parties">Parties</a>
+      <a href="#crew">Crew orders</a>
+      <a href="#bars">The bar</a>
+      <a href="#find">Find us</a>
+      <a class="btn" href="#book">Book a party</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="stage" id="stage">
+      <h1 class="word display" id="hero-title"><span>Pressed</span></h1>
+      <canvas id="scene" aria-label="3D hat, tee and press-on nails. Tap one to press it." role="img"></canvas>
+      <div class="hint" id="hint" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 11V5a2 2 0 0 1 4 0v6m0-1a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2-4a2 2 0 0 1 3.4-2L9 13"/></svg>
+        Tap a piece to press it
+      </div>
+    </div>
+    <div class="wrap intro">
+      <div>
+        <div class="pills"><span class="pill">Press-on nail kits</span><span class="pill">Custom tees</span><span class="pill">Hat &amp; patch bar</span></div>
+        <p class="eyebrow">Rappahannock Dreamer's Bar · Stafford + Fredericksburg</p>
+        <p class="lede" style="margin-top:var(--space-3)">Nails, tees and hats made in front of you, in minutes, the way you dreamed them. Bring the bar to your party or suit up your whole crew.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn" href="#book">Book a party</a>
+        <a class="btn ghost" href="#quote">Get a crew quote</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Press-on nail kits <i>·</i> Custom tees <i>·</i> Hat &amp; patch bar <i>·</i> Parties <i>·</i> Crew orders <i>·</i></span>
+      <span>Press-on nail kits <i>·</i> Custom tees <i>·</i> Hat &amp; patch bar <i>·</i> Parties <i>·</i> Crew orders <i>·</i></span>
+    </div>
+  </div>
+
+  <section class="block" id="parties" aria-labelledby="parties-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Parties</p>
+        <h2 class="display" id="parties-title">Your party.<br>Our bar.</h2>
+        <p class="lede muted">We set up, run the bar and pack it all away. Every guest leaves wearing something they made.</p>
+      </div>
+
+      <div class="packs">
+        <article class="pack reveal" data-tilt>
+          <h3 class="display">Mini Press</h3>
+          <ul>
+            <li>Up to 10 guests</li>
+            <li>Pick one bar: nails, tees or hats</li>
+            <li>90 minutes, set up at your place</li>
+          </ul>
+          <p class="price">From $[price]</p>
+        </article>
+        <article class="pack star reveal" data-tilt>
+          <span class="flag">Most booked</span>
+          <h3 class="display">Full Press</h3>
+          <ul>
+            <li>Up to 20 guests</li>
+            <li>All three bars: nails, tees and hats</li>
+            <li>2 hours, birthday guest goes first</li>
+          </ul>
+          <p class="price">From $[price]</p>
+        </article>
+        <article class="pack reveal" data-tilt>
+          <h3 class="display">Crowd Press</h3>
+          <ul>
+            <li>25 guests and up</li>
+            <li>Schools, churches, offices, block parties</li>
+            <li>Custom time and bar mix</li>
+          </ul>
+          <p class="price">Custom quote</p>
+        </article>
+      </div>
+
+      <div class="formcard reveal" id="book">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <p class="eyebrow">Book a party</p>
+          <h3 class="display">Hold your date</h3>
+          <p class="muted">Send your date and guest count. We reply within one day with a price and a secure deposit link. The deposit holds your date.</p>
+          <p class="small muted">Questions first? Email <span class="addr">hello@pressedva.com</span></p>
+        </div>
+        <div>
+          <form id="partyForm" novalidate data-kind="Party booking">
+            <div class="field"><label for="p-name">Your name</label><input id="p-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="p-phone">Phone</label><input id="p-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="p-date">Party date</label><input id="p-date" name="date" type="date" required></div>
+            <div class="field"><label for="p-guests">Guests</label><input id="p-guests" name="guests" type="number" min="1" inputmode="numeric" required></div>
+            <div class="field"><label for="p-pack">Package</label>
+              <select id="p-pack" name="package"><option>Full Press</option><option>Mini Press</option><option>Crowd Press</option><option>Not sure yet</option></select></div>
+            <div class="field full"><span class="legend" id="p-kind-l">What's the party?</span>
+              <div class="checks" role="group" aria-labelledby="p-kind-l">
+                <label class="chip"><input type="radio" name="occasion" value="Birthday" checked><span>Birthday</span></label>
+                <label class="chip"><input type="radio" name="occasion" value="Sweet 16"><span>Sweet 16</span></label>
+                <label class="chip"><input type="radio" name="occasion" value="Bridal"><span>Bridal</span></label>
+                <label class="chip"><input type="radio" name="occasion" value="Office"><span>Office</span></label>
+                <label class="chip"><input type="radio" name="occasion" value="Other"><span>Other</span></label>
+              </div></div>
+            <div class="field full"><label for="p-notes">Anything else? <span class="muted" style="font-weight:var(--weight-regular)">(theme, colors, location)</span></label><textarea id="p-notes" name="notes"></textarea></div>
+            <div class="form-foot"><p class="err" id="partyForm-err" role="alert"></p><button class="btn" type="submit">Request my date</button></div>
+          </form>
+          <div class="done" id="partyForm-done" hidden tabindex="-1">
+            <h4>Date requested</h4>
+            <p data-summary></p>
+            <p class="small">We reply from <span class="addr">hello@pressedva.com</span> within one day with your price and deposit link.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block crew" id="crew" aria-labelledby="crew-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Crew orders</p>
+        <h2 class="display" id="crew-title">Suit up<br>the whole crew.</h2>
+        <p class="lede muted">Tees and hats with your logo for teams, schools, churches and businesses. Orders from 12 pieces.</p>
+      </div>
+      <ol class="steps reveal">
+        <li><b>Send your logo</b><span class="muted">Any file works. A phone photo of your old shirt works too.</span></li>
+        <li><b>Approve the proof</b><span class="muted">We mock it up on the real blank before anything gets pressed.</span></li>
+        <li><b>We press and deliver</b><span class="muted">Picked up at a pop-up or dropped off in Stafford and Fredericksburg.</span></li>
+      </ol>
+      <div class="formcard reveal" id="quote">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <p class="eyebrow">Crew quote</p>
+          <h3 class="display">Price my order</h3>
+          <p class="muted">Tell us what you need and when. You get a price and a proof back, usually within two days.</p>
+        </div>
+        <div>
+          <form id="crewForm" novalidate data-kind="Crew quote">
+            <div class="field"><label for="c-org">Team or business</label><input id="c-org" name="organization" autocomplete="organization" required></div>
+            <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field full"><span class="legend" id="c-items-l">What do you need?</span>
+              <div class="checks" role="group" aria-labelledby="c-items-l">
+                <label class="chip"><input type="checkbox" name="items" value="Tees" checked><span>Tees</span></label>
+                <label class="chip"><input type="checkbox" name="items" value="Hats"><span>Hats</span></label>
+                <label class="chip"><input type="checkbox" name="items" value="Hoodies"><span>Hoodies</span></label>
+              </div></div>
+            <div class="field"><label for="c-qty">How many pieces?</label><input id="c-qty" name="quantity" type="number" min="12" inputmode="numeric" required></div>
+            <div class="field"><label for="c-date">Needed by</label><input id="c-date" name="needed_by" type="date"></div>
+            <div class="field full"><label for="c-logo">Logo <span class="muted" style="font-weight:var(--weight-regular)">(optional, you can email it later)</span></label><input id="c-logo" name="logo" type="file" accept="image/*,.pdf,.ai,.svg"></div>
+            <div class="form-foot"><p class="err" id="crewForm-err" role="alert"></p><button class="btn light" type="submit">Get my quote</button></div>
+          </form>
+          <div class="done" id="crewForm-done" hidden tabindex="-1">
+            <h4>Quote requested</h4>
+            <p data-summary></p>
+            <p class="small">We reply from <span class="addr">hello@pressedva.com</span> with a price and a proof.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="bars" aria-labelledby="bars-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">The bar</p>
+        <h2 class="display" id="bars-title">Three tents.<br>One dream.</h2>
+      </div>
+      <div class="bars">
+        <div class="barrow reveal"><h3 class="display">Polish</h3><p><b>Press-on nail kit bar.</b> Pick a shape, length and color, add charms. We size the set, box it and put your name on it. You press at home.</p></div>
+        <div class="barrow reveal"><h3 class="display">Press</h3><p><b>Custom tee bar.</b> Pick a blank and a graphic, add a name or a date. Heat-pressed while you watch, ready in minutes.</p></div>
+        <div class="barrow reveal"><h3 class="display">Crown</h3><p><b>Hat &amp; patch bar.</b> Trucker or dad hat, pick your patches, place them where you want. We press them on the spot.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block drop" aria-labelledby="drop-title">
+    <div class="wrap">
+      <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <p class="eyebrow">Online drops</p>
+        <h2 class="display" id="drop-title">Holiday drop.<br>Limited run.</h2>
+        <p>Limited tees, hats and nail sets. Pre-order online, pick up at the next pop-up. Get first dibs by email.</p>
+      </div>
+      <div>
+        <form id="dropForm" novalidate data-kind="Drop list">
+          <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" autocomplete="email" required></div>
+          <button class="btn light" type="submit">Get drop alerts</button>
+          <p class="err" id="dropForm-err" role="alert" style="grid-column:1/-1"></p>
+        </form>
+        <div class="done" id="dropForm-done" hidden tabindex="-1"><h4>You're on the list</h4><p data-summary></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="find" aria-labelledby="find-title">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Find us</p>
+        <h2 class="display" id="find-title">Next pop-ups</h2>
+      </div>
+      <ul class="dates reveal">
+        <li><span class="d">[Date]</span><span class="w">[Event name]</span><span class="muted">[Place], Stafford</span></li>
+        <li><span class="d">[Date]</span><span class="w">[Event name]</span><span class="muted">[Place], Fredericksburg</span></li>
+        <li><span class="d">Sat Nov 28</span><span class="w">Small Business Saturday pop-up</span><span class="muted">[Place]</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big display" aria-hidden="true">Dream it. Press it.</p>
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+        <b>pressedva.com</b>
+        <div class="copyrow"><span class="addr" id="mail">hello@pressedva.com</span><button class="copybtn" type="button" id="copyMail">Copy email</button></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+        <span>Stafford + Fredericksburg, Virginia</span>
+        <span>Instagram and TikTok: [@handle]</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<p class="sr" id="live" aria-live="polite"></p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* Where form requests go once the site is live. Leave empty in the preview. */
+var FORM_ENDPOINT = "";
+
+document.documentElement.classList.add('js');
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var live = document.getElementById('live');
+function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+/* ---------- Reveal on scroll (content visible by default) ---------- */
+(function(){
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var vh = window.innerHeight;
+  els.forEach(function(el){ if (el.getBoundingClientRect().top > vh * 0.9) el.classList.add('pre'); });
+  var io = new IntersectionObserver(function(ents){
+    ents.forEach(function(e){ if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
+  setTimeout(function(){ els.forEach(function(el){ el.classList.remove('pre'); }); }, 4000);
+})();
+
+/* ---------- Package card 3D tilt ---------- */
+(function(){
+  if (reduce || !window.matchMedia('(hover: hover)').matches) return;
+  document.querySelectorAll('[data-tilt]').forEach(function(card){
+    card.addEventListener('pointermove', function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(900px) rotateX(' + (-y * 8) + 'deg) rotateY(' + (x * 10) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+  });
+})();
+
+/* ---------- Forms ---------- */
+(function(){
+  function summarize(form){
+    var fd = new FormData(form), parts = [];
+    var byKey = {};
+    fd.forEach(function(v, k){ if (v instanceof File) { if (v.name) byKey[k] = v.name; return; } if (!v) return; byKey[k] = byKey[k] ? byKey[k] + ', ' + v : v; });
+    Object.keys(byKey).forEach(function(k){ parts.push(k.replace(/_/g, ' ') + ': ' + byKey[k]); });
+    return { data: byKey, text: parts.join(' · ') };
+  }
+  function check(form){
+    var bad = [];
+    [].slice.call(form.querySelectorAll('[required]')).forEach(function(inp){
+      inp.removeAttribute('aria-invalid');
+      if (!inp.checkValidity()) { inp.setAttribute('aria-invalid', 'true'); bad.push(inp); }
+    });
+    if (form.id === 'crewForm' && !form.querySelector('input[name="items"]:checked')) bad.push(form.querySelector('input[name="items"]'));
+    return bad;
+  }
+  function labelFor(inp){
+    var l = document.querySelector('label[for="' + inp.id + '"]');
+    if (l) return l.firstChild.textContent.trim();
+    return 'What do you need?';
+  }
+  ['partyForm', 'crewForm', 'dropForm'].forEach(function(id){
+    var form = document.getElementById(id);
+    var err = document.getElementById(id + '-err');
+    var done = document.getElementById(id + '-done');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var bad = check(form);
+      if (bad.length) {
+        var first = bad[0];
+        var msg = first.type === 'email' && first.value ? 'Check the email address. It needs an @ and a domain, like name@gmail.com.'
+          : first.name === 'quantity' && first.value ? 'Crew orders start at 12 pieces. Enter 12 or more.'
+          : 'Fill in ' + bad.map(labelFor).join(', ') + ' to continue.';
+        err.textContent = msg; first.focus(); return;
+      }
+      err.textContent = '';
+      var s = summarize(form);
+      var finish = function(){
+        form.hidden = true; done.hidden = false;
+        done.querySelector('[data-summary]').textContent = s.text;
+        done.focus(); live.textContent = form.getAttribute('data-kind') + ' sent.';
+      };
+      if (FORM_ENDPOINT) {
+        var btn = form.querySelector('button[type="submit"]'); var label = btn.textContent;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        var payload = new FormData(form); payload.append('_subject', form.getAttribute('data-kind') + ' from pressedva.com');
+        fetch(FORM_ENDPOINT, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
+          .then(function(r){ if (!r.ok) throw new Error(r.status); finish(); })
+          .catch(function(){ btn.disabled = false; btn.textContent = label; err.textContent = "That didn't send. Check your connection and try again, or email hello@pressedva.com."; });
+      } else { finish(); }
+    });
+  });
+})();
+
+/* ---------- Copy email ---------- */
+document.getElementById('copyMail').addEventListener('click', function(){
+  var btn = this, addr = document.getElementById('mail');
+  var ok = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy email'; }, 1800); };
+  try {
+    navigator.clipboard.writeText(addr.textContent).then(ok, function(){ selectIt(); });
+  } catch (e) { selectIt(); }
+  function selectIt(){ var r = document.createRange(); r.selectNodeContents(addr); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected: copy it'; }
+});
+
+/* ---------- 3D hero: the press ---------- */
+(function(){
+  var canvas = document.getElementById('scene'), stage = document.getElementById('stage'), hint = document.getElementById('hint');
+  if (!window.THREE) { canvas.hidden = true; hint.hidden = true; return; }
+  var renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); }
+  catch (e) { canvas.hidden = true; hint.hidden = true; return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  function lin(n){ return new THREE.Color(tok(n)).convertSRGBToLinear(); }
+  var C = {
+    lipstick: lin('--lipstick'), berry: lin('--berry'), forest: lin('--forest'),
+    chalk: lin('--chalk'), bubble: lin('--bubble'), blush: lin('--blush')
+  };
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  camera.position.set(0, 0, 11);
+
+  scene.add(new THREE.HemisphereLight(C.chalk, C.blush, 0.75));
+  var key = new THREE.DirectionalLight(0xffffff, 1.0); key.position.set(4, 6, 7); scene.add(key);
+  var rim = new THREE.DirectionalLight(C.bubble, 0.9); rim.position.set(-6, 2, -4); scene.add(rim);
+  var glow = new THREE.PointLight(C.lipstick, 0.8, 30); glow.position.set(-5, -3, 5); scene.add(glow);
+
+  function mat(color, opts){
+    return new THREE.MeshPhysicalMaterial(Object.assign({ color: color, roughness: 0.42, metalness: 0.02, clearcoat: 0.4, clearcoatRoughness: 0.35 }, opts || {}));
+  }
+  function labelTexture(text, fg, bg, w, h, font){
+    var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    var g = cv.getContext('2d');
+    if (bg) { g.fillStyle = bg; g.fillRect(0, 0, w, h); }
+    g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = font; g.fillText(text, w / 2, h / 2 + h * 0.04);
+    var t = new THREE.CanvasTexture(cv); t.encoding = THREE.sRGBEncoding; t.anisotropy = 4; return t;
+  }
+  var displayFont = function(px){ return px + 'px Anton, "Arial Narrow", Impact, sans-serif'; };
+
+  /* Trucker hat */
+  function makeHat(){
+    var g = new THREE.Group();
+    var crown = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32, 0, Math.PI * 2, 0, Math.PI / 2), mat(C.lipstick));
+    crown.scale.set(1, 0.9, 1); g.add(crown);
+    var shape = new THREE.Shape();
+    shape.moveTo(1.0, 0);
+    shape.absellipse(0, 0, 1.02, 1.85, 0, Math.PI, false);
+    shape.lineTo(-0.97, 0);
+    shape.absarc(0, 0, 0.97, Math.PI, 0, true);
+    var brimGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 3, curveSegments: 40 });
+    var brim = new THREE.Mesh(brimGeo, mat(C.forest));
+    brim.rotation.x = Math.PI / 2 - 0.12; brim.position.y = 0.02; g.add(brim);
+    var btn = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 12), mat(C.forest)); btn.position.y = 0.9; g.add(btn);
+    var patchTex = labelTexture('P', tok('--forest'), tok('--chalk'), 256, 256, displayFont(190));
+    var patch = new THREE.Mesh(new THREE.CircleGeometry(0.3, 48), new THREE.MeshStandardMaterial({ map: patchTex, roughness: 0.8 }));
+    patch.position.set(0, 0.4, 0.93); patch.rotation.x = -0.48; g.add(patch);
+    g.rotation.set(0.35, -0.5, 0.08);
+    return g;
+  }
+
+  /* Tee */
+  function makeTee(){
+    var s = new THREE.Shape();
+    s.moveTo(-0.32, 1.05);
+    s.quadraticCurveTo(0, 0.78, 0.32, 1.05);
+    s.lineTo(0.82, 0.92); s.lineTo(1.28, 0.42); s.lineTo(0.96, 0.14); s.lineTo(0.74, 0.36);
+    s.lineTo(0.74, -1.0); s.quadraticCurveTo(0, -1.08, -0.74, -1.0);
+    s.lineTo(-0.74, 0.36); s.lineTo(-0.96, 0.14); s.lineTo(-1.28, 0.42); s.lineTo(-0.82, 0.92);
+    s.lineTo(-0.32, 1.05);
+    var geo = new THREE.ExtrudeGeometry(s, { depth: 0.22, bevelEnabled: true, bevelThickness: 0.09, bevelSize: 0.07, bevelSegments: 5, curveSegments: 24 });
+    geo.center();
+    var g = new THREE.Group();
+    g.add(new THREE.Mesh(geo, mat(C.forest, { roughness: 0.7, clearcoat: 0.1 })));
+    var printTex = labelTexture('PRESSED', tok('--bubble'), null, 512, 160, displayFont(128));
+    var print = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 0.36), new THREE.MeshBasicMaterial({ map: printTex, transparent: true }));
+    print.position.set(0, 0.18, 0.21); g.add(print);
+    g.rotation.set(0.1, 0.45, -0.12);
+    return g;
+  }
+
+  /* Press-on nail fan */
+  function nailGeo(){
+    var s = new THREE.Shape();
+    s.moveTo(-0.3, -0.55); s.lineTo(-0.3, 0.1);
+    s.quadraticCurveTo(-0.28, 0.58, 0, 0.9);
+    s.quadraticCurveTo(0.28, 0.58, 0.3, 0.1);
+    s.lineTo(0.3, -0.55); s.quadraticCurveTo(0, -0.66, -0.3, -0.55);
+    var geo = new THREE.ExtrudeGeometry(s, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 4, curveSegments: 28 });
+    var p = geo.attributes.position;
+    for (var i = 0; i < p.count; i++) { var x = p.getX(i); p.setZ(i, p.getZ(i) - 1.1 * x * x); }
+    geo.computeVertexNormals();
+    return geo;
+  }
+  function makeNails(){
+    var g = new THREE.Group(), geo = nailGeo();
+    var colors = [C.bubble, C.lipstick, C.berry];
+    for (var i = 0; i < 3; i++) {
+      var m = new THREE.Mesh(geo, mat(colors[i], { roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.08 }));
+      m.position.set((i - 1) * 0.5, -Math.abs(i - 1) * 0.12, (i === 1 ? 0.08 : 0));
+      m.rotation.z = (1 - i) * 0.32; g.add(m);
+    }
+    var charm = new THREE.Mesh(new THREE.OctahedronGeometry(0.1, 0), mat(C.chalk, { roughness: 0.1, clearcoat: 1 }));
+    charm.position.set(0, 0.36, 0.12); g.add(charm);
+    g.rotation.set(-0.35, 0.25, 0);
+    g.scale.setScalar(1.25);
+    return g;
+  }
+
+  var items = [
+    { obj: makeHat(),   name: 'hat' },
+    { obj: makeTee(),   name: 'tee' },
+    { obj: makeNails(), name: 'nails' }
+  ];
+  items.forEach(function(it, k){
+    var holder = new THREE.Group(); holder.add(it.obj); scene.add(holder);
+    it.holder = holder; it.base = it.obj.rotation.clone(); it.press = 0; it.phase = k * 2.1; it.spin = 0; it.spinTo = 0;
+  });
+
+  /* Sparks */
+  var sparks = [], sparkGeo = new THREE.OctahedronGeometry(0.06, 0);
+  function burst(at){
+    var palette = [C.lipstick, C.bubble, C.forest, C.chalk];
+    for (var i = 0; i < 22; i++) {
+      var m = new THREE.Mesh(sparkGeo, new THREE.MeshBasicMaterial({ color: palette[i % 4], transparent: true }));
+      m.position.copy(at);
+      var a = Math.random() * Math.PI * 2, e = (Math.random() - 0.3) * 1.2, sp = 2.5 + Math.random() * 3;
+      m.userData.v = new THREE.Vector3(Math.cos(a) * sp, Math.abs(e) * sp + 1, Math.sin(a) * sp * 0.5);
+      m.userData.life = 0; scene.add(m); sparks.push(m);
+    }
+  }
+
+  /* Layout per aspect */
+  var W = 1, H = 1, mobile = false;
+  function layout(){
+    var r = stage.getBoundingClientRect(); W = r.width; H = r.height;
+    renderer.setSize(W, H, false);
+    camera.aspect = W / H; camera.updateProjectionMatrix();
+    mobile = W / H < 0.9;
+    var P = mobile
+      ? [[-0.8, 1.55, 0, 0.8], [0.95, 0.2, 0, 0.85], [-0.6, -1.15, 1.0, 0.85]]
+      : [[-3.3, 0.55, 0, 1.25], [3.1, 0.35, 0, 1.2], [0.1, 0.5, 1.4, 1.05]];
+    items.forEach(function(it, k){ it.home = new THREE.Vector3(P[k][0], P[k][1], P[k][2]); it.size = P[k][3]; it.holder.position.copy(it.home); it.holder.scale.setScalar(it.size); });
+  }
+  layout();
+  window.addEventListener('resize', layout);
+
+  /* Input */
+  var pointer = new THREE.Vector2(0, 0), target = new THREE.Vector2(0, 0), ray = new THREE.Raycaster();
+  var downAt = null;
+  canvas.addEventListener('pointermove', function(e){
+    var r = canvas.getBoundingClientRect();
+    target.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  });
+  canvas.addEventListener('pointerdown', function(e){ downAt = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener('pointerup', function(e){
+    if (!downAt || Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 12) { downAt = null; return; }
+    downAt = null;
+    var r = canvas.getBoundingClientRect();
+    pointer.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(pointer, camera);
+    var hits = ray.intersectObjects(items.map(function(it){ return it.holder; }), true);
+    if (!hits.length) return;
+    var hitObj = hits[0].object, it = items.filter(function(x){ var o = hitObj; while (o) { if (o === x.holder) return true; o = o.parent; } return false; })[0];
+    if (!it) return;
+    it.press = 1; it.spinTo += Math.PI * 2;
+    burst(hits[0].point);
+    hint.classList.add('gone');
+    try { if (navigator.vibrate) navigator.vibrate(12); } catch (err) {}
+    live.textContent = 'Pressed the ' + it.name + '.';
+  });
+
+  /* Visibility */
+  var visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; if (visible) loop(); }, { threshold: 0 }).observe(stage);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) loop(); });
+
+  var clock = new THREE.Clock(), running = false;
+  function frame(){
+    var dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+    pointer.lerp(target, 0.06);
+    var scrollK = Math.min(1, Math.max(0, window.scrollY / Math.max(1, H)));
+    items.forEach(function(it){
+      var float = reduce ? 0 : Math.sin(t * 1.1 + it.phase) * 0.12;
+      it.holder.position.set(it.home.x + pointer.x * 0.25, it.home.y + float + scrollK * 1.2, it.home.z);
+      it.spin += (it.spinTo - it.spin) * Math.min(1, dt * 4);
+      var idle = reduce ? 0 : t * 0.25 + it.phase;
+      it.obj.rotation.set(it.base.x - pointer.y * 0.25, it.base.y + pointer.x * 0.45 + Math.sin(idle) * 0.35 + it.spin + scrollK * 1.5, it.base.z);
+      /* press: squash then spring */
+      if (it.press > 0.001) {
+        it.press = Math.max(0, it.press - dt * 1.6);
+        var p = it.press, env = Math.sin((1 - p) * Math.PI * 3) * p;
+        var squash = p > 0.8 ? (1 - p) / 0.2 : 1;
+        var k = 1 - 0.5 * p * squash + 0.12 * env;
+        it.obj.scale.set(1 + 0.25 * p * squash - 0.05 * env, k, 1 + 0.25 * p * squash - 0.05 * env);
+      } else it.obj.scale.set(1, 1, 1);
+    });
+    for (var i = sparks.length - 1; i >= 0; i--) {
+      var s = sparks[i]; s.userData.life += dt;
+      s.userData.v.y -= 7 * dt; s.position.addScaledVector(s.userData.v, dt);
+      s.rotation.x += dt * 6; s.rotation.y += dt * 4;
+      s.material.opacity = Math.max(0, 1 - s.userData.life / 0.9);
+      if (s.userData.life > 0.9) { scene.remove(s); s.material.dispose(); sparks.splice(i, 1); }
+    }
+    renderer.render(scene, camera);
+  }
+  function loop(){
+    if (running) return; running = true;
+    (function step(){
+      if (!visible || document.hidden) { running = false; return; }
+      frame(); requestAnimationFrame(step);
+    })();
+  }
+  frame(); loop();
+})();
+</script>
+</body>
+</html>
