@@ -105,7 +105,7 @@
   --motion-reveal: 1;          /* seconds for a text or card reveal */
   --motion-stagger: 0.09;      /* seconds between siblings in a reveal */
   --motion-pin-desktop: 110;   /* % of viewport height scrolled while the hero is pinned */
-  --motion-pin-mobile: 80;
+  --motion-pin-mobile: 40;
 
   /* --- Layout -------------------------------------------------- */
   --header-h: calc(4.25rem + env(safe-area-inset-top, 0px));

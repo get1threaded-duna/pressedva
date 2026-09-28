@@ -89,7 +89,7 @@
           start: 'top top+=' + headerH(),
           end: '+=' + pinLen + '%',
           pin: true,
-          scrub: 0.6,
+          scrub: wide ? 0.6 : true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: function (self) { if (hero) hero.p = self.progress; }
@@ -162,7 +162,7 @@
 
       /* ---------- Footer wordmark builds as it arrives ---------- */
       var foot = SplitText.create('footer .big', { type: 'lines,chars', mask: 'lines', aria: 'none' });
-      gsap.from(foot.chars, { yPercent: 118, rotate: 7, ease: 'none', stagger: 0.04, scrollTrigger: { trigger: 'footer', start: 'top 92%', end: 'top 30%', scrub: 0.6 } });
+      gsap.from(foot.chars, { yPercent: 118, rotate: 7, duration: T.reveal * 1.1, ease: 'expo.out', stagger: 0.035, scrollTrigger: { trigger: 'footer .big', start: 'top 92%', once: true } });
       gsap.from('footer .cols', { y: 30, opacity: 0, duration: T.reveal, ease: 'expo.out', scrollTrigger: { trigger: 'footer .cols', start: 'top 98%', once: true } });
 
       /* ---------- Marquee: scroll speed and direction push it ---------- */
