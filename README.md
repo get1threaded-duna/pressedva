@@ -5,7 +5,19 @@ Static one-page site for PRESSED — Rappahannock Dreamer's Bar. No build step.
 ```
 index.html          the site (3D hero uses Three.js r128 from cdnjs)
 design/tokens.css   every color, size, space and motion value — edit here, not in index.html
+js/motion.js        all scroll and entrance motion (GSAP)
+vendor/gsap/        GSAP 3.15.0: core, ScrollTrigger, ScrollSmoother, SplitText (self-hosted)
 ```
+
+## Motion
+
+All motion runs on GSAP: smooth scrolling (ScrollSmoother), the pinned hero, line-mask heading reveals, scrubbed body copy, section curtains, the footer wordmark, the scroll-driven marquee and button feel. The 3D scene renders on GSAP's ticker so it stays in step with the scroll.
+
+- Tune feel in `design/tokens.css` under `--motion-*` (smoothing, reveal time, stagger, pin length).
+- With `prefers-reduced-motion: reduce`, `js/motion.js` does nothing and the page is plain and static.
+- Smooth scrolling is off on touch devices by design; pins and reveals still run there.
+- GSAP is used under its "no charge" license (see gsap.com/standard-license). To update, replace the four files in `vendor/gsap/` from the `gsap` npm package `dist/`.
+- After changing content height with JS, call `ScrollTrigger.refresh()`.
 
 ## Deploy to Vercel
 

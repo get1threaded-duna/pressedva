@@ -100,7 +100,15 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* --- GSAP motion (unitless numbers, read by js/motion.js) ------ */
+  --motion-smooth: 1.2;        /* seconds of scroll smoothing */
+  --motion-reveal: 1;          /* seconds for a text or card reveal */
+  --motion-stagger: 0.09;      /* seconds between siblings in a reveal */
+  --motion-pin-desktop: 110;   /* % of viewport height scrolled while the hero is pinned */
+  --motion-pin-mobile: 80;
+
   /* --- Layout -------------------------------------------------- */
+  --header-h: calc(4.25rem + env(safe-area-inset-top, 0px));
   --content-max: 62ch;
   --page-max: 1240px;
   --touch-min: 44px;
