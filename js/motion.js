@@ -95,9 +95,15 @@
           onUpdate: function (self) { if (hero) hero.p = self.progress; }
         }
       });
+      // Wide: letters fan out and the word grows. Narrow: the word already fills the screen, so letters ripple upward in a wave instead.
       pinTL
-        .to(chars, { x: function (i) { return (i - mid) * window.innerWidth * (wide ? 0.018 : 0.006); }, rotate: function (i) { return (i - mid) * 2.2; }, duration: 1 }, 0)
-        .to(word, { scale: wide ? 1.22 : 1.04, yPercent: -6, color: tok('--bubble'), duration: 1 }, 0)
+        .fromTo(chars, { x: 0, yPercent: 0, rotate: 0 }, {
+          x: function (i) { return wide ? (i - mid) * window.innerWidth * 0.018 : 0; },
+          yPercent: function (i) { return wide ? 0 : -14 - 18 * Math.abs(Math.sin(i * 0.9)); },
+          rotate: function (i) { return (i - mid) * (wide ? 2.2 : 3.6); },
+          duration: 1, immediateRender: false
+        }, 0)
+        .to(word, { scale: wide ? 1.22 : 1, yPercent: wide ? -6 : 0, color: tok('--bubble'), duration: 1 }, 0)
         .to('#hint', { opacity: 0, duration: 0.12 }, 0);
       if (hero) hero.driven = true;
 
