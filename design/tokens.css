@@ -9,9 +9,8 @@
                coaches, schools and small businesses ordering crew gear.
    PAGE JOB:   Turn a visitor into a party booking or a crew quote.
 
-   SIGNATURE:  The press. A 3D trucker hat, tee and press-on nail float
-               in front of a giant PRESSED wordmark; tap one and it gets
-               heat-pressed flat, then springs back.
+   SIGNATURE:  The hero film: a looping shot from fresh press-on nails up to
+               the hat and tee, captioned "Get pressed."
 
    RISK TAKEN: Lipstick magenta and forest green as the only two colors,
                on a warm chalk ground. No neutral grey anywhere.
@@ -46,6 +45,11 @@
   --success: var(--forest);
   --danger:  #a3123f;
 
+  /* Over video: scrim keeps captions readable, glass for controls */
+  --scrim:      rgb(0 30 16 / 0.82);
+  --scrim-soft: rgb(0 30 16 / 0.32);
+  --glass:      rgb(0 30 16 / 0.35);
+
   /* --- Type ---------------------------------------------------- */
   --font-display: 'Anton', 'Oswald', 'Arial Narrow', Impact, sans-serif;
   --font-body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -60,6 +64,7 @@
   --text-3xl:  clamp(3.25rem, 12vw, 6.5rem);
   --text-hero: clamp(5.5rem, 26vw, 17rem);
   --text-footer: clamp(3.5rem, 16vw, 11rem);
+  --text-hero-video: clamp(4.25rem, 17vw, 7.5rem);
 
   --leading-display: 0.92;
   --leading-tight:   1.15;
@@ -100,15 +105,7 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* --- GSAP motion (unitless numbers, read by js/motion.js) ------ */
-  --motion-smooth: 1.2;        /* seconds of scroll smoothing */
-  --motion-reveal: 1;          /* seconds for a text or card reveal */
-  --motion-stagger: 0.09;      /* seconds between siblings in a reveal */
-  --motion-pin-desktop: 110;   /* % of viewport height scrolled while the hero is pinned */
-  --motion-pin-mobile: 40;
-
   /* --- Layout -------------------------------------------------- */
-  --header-h: calc(4.25rem + env(safe-area-inset-top, 0px));
   --content-max: 62ch;
   --page-max: 1240px;
   --touch-min: 44px;
