@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop — PRESSED</title>
+<meta name="description" content="Press-on nail sets, custom tees and hats from PRESSED in Stafford and Fredericksburg, VA. Pick up at a pop-up or get local drop-off.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="design/tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg-base);color:var(--text-primary);font-family:var(--font-body);font-size:var(--text-base);line-height:var(--leading-body);overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.wrap{width:100%;max-width:var(--page-max);margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase}
+.display{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;line-height:var(--leading-display);text-wrap:balance}
+.muted{color:var(--text-secondary)}
+.small{font-size:var(--text-sm)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:var(--touch-min);padding:var(--space-3) var(--space-6);border-radius:var(--radius-sm);border:var(--border-width) solid var(--action);background:var(--action);color:var(--action-text);font:var(--weight-bold) var(--text-base)/1 var(--font-body);text-decoration:none;cursor:pointer;transition:transform var(--duration-fast) var(--ease-out)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn.pink{background:var(--berry);border-color:var(--berry);color:var(--chalk)}
+.btn.ghost{background:transparent;color:var(--accent-text);border-color:var(--accent-text)}
+.btn.block{width:100%}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:var(--bg-base);padding-top:env(safe-area-inset-top,0px);border-bottom:var(--border-width) solid var(--bg-raised)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}
+.mark{display:flex;align-items:center;gap:var(--space-3);text-decoration:none}
+.bolt{width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-full);background:var(--accent);display:grid;place-items:center;color:var(--chalk);flex:none}
+.mark b{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--text-lg)}
+.nav{display:flex;align-items:center;gap:var(--space-6);font-weight:var(--weight-medium)}
+.nav a{text-decoration:none;padding-block:var(--space-2)}
+.nav a[aria-current]{color:var(--accent-text);text-decoration:underline;text-underline-offset:.3em}
+.nav a:not(.btn):hover{color:var(--accent-text)}
+@media (max-width:760px){.nav .hide-sm{display:none}}
+.bagbtn{position:relative;display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:var(--border-width) solid var(--forest);background:var(--forest);color:var(--chalk);font:var(--weight-bold) var(--text-sm)/1 var(--font-body);cursor:pointer}
+.bagcount{min-width:1.5rem;height:1.5rem;padding-inline:var(--space-1);border-radius:var(--radius-full);background:var(--bubble);color:var(--forest);display:grid;place-items:center;font-size:var(--text-xs)}
+
+/* Shop head */
+.shophead{padding-block:var(--space-12) var(--space-8);display:flex;flex-direction:column;gap:var(--space-4)}
+.shophead h1{font-size:var(--text-3xl);color:var(--accent)}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
+@media (max-width:900px){.offers{grid-template-columns:minmax(0,1fr)}}
+.offer{display:flex;flex-direction:column;gap:var(--space-1);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);background:var(--bg-raised)}
+.offer.dark{background:var(--bg-dark);color:var(--text-on-dark)}
+.offer b{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:var(--text-xl);line-height:1.05;color:var(--accent-text)}
+.offer.dark b{color:var(--bubble)}
+.code{font-weight:var(--weight-bold);letter-spacing:.06em;user-select:all;padding:0 var(--space-1);border-radius:var(--radius-sm);background:var(--chalk);color:var(--forest)}
+
+/* Tabs */
+.tabs{position:sticky;top:calc(4.25rem + env(safe-area-inset-top,0px));z-index:10;background:var(--bg-base);padding-block:var(--space-3);display:flex;gap:var(--space-2);overflow-x:auto;scrollbar-width:none}
+.tab{flex:none;min-height:var(--touch-min);padding:var(--space-2) var(--space-6);border-radius:var(--radius-full);border:var(--border-width) solid var(--moss);background:transparent;color:var(--forest);font:var(--weight-bold) var(--text-sm)/1 var(--font-body);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--chalk)}
+
+/* Grid */
+.group{padding-block:var(--space-8) var(--space-12)}
+.group h2{font-size:var(--text-2xl);color:var(--accent);margin-bottom:var(--space-2)}
+.group .intro{margin-bottom:var(--space-6);max-width:var(--content-max)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-8) var(--space-6)}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6) var(--space-3)}}
+.card{display:flex;flex-direction:column;gap:var(--space-2)}
+.ph{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:var(--radius-md);overflow:hidden;background:var(--bg-raised)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform var(--duration-slow) var(--ease-out)}
+.card:hover .ph img{transform:scale(1.04)}
+.badge{position:absolute;top:var(--space-3);left:var(--space-3);font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;background:var(--berry);color:var(--chalk);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full)}
+.card h3{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:var(--text-xl);line-height:1}
+.card .desc{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.4}
+.price{display:flex;align-items:baseline;gap:var(--space-2);font-variant-numeric:tabular-nums}
+.price .now{font-weight:var(--weight-bold);font-size:var(--text-lg)}
+.price.sale .now{color:var(--accent-text)}
+.price s{color:var(--text-secondary);font-size:var(--text-sm)}
+.opts{display:flex;gap:var(--space-2);align-items:center;margin-top:auto}
+.opts select{flex:1;min-width:0;font:inherit;font-size:var(--text-sm);color:var(--text-primary);background:var(--bg-base);border:var(--border-width) solid var(--moss);border-radius:var(--radius-sm);padding:var(--space-2);min-height:var(--touch-min)}
+.add{flex:none;min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-sm);border:0;background:var(--forest);color:var(--chalk);font:var(--weight-bold) var(--text-sm)/1 var(--font-body);cursor:pointer}
+.add.done{background:var(--berry)}
+@media (max-width:420px){.opts{flex-direction:column;align-items:stretch}}
+
+.box{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--space-8);align-items:center;padding:var(--space-8);border-radius:var(--radius-lg);background:var(--bg-raised)}
+@media (max-width:760px){.box{grid-template-columns:minmax(0,1fr);padding:var(--space-6)}}
+.box img{border-radius:var(--radius-md)}
+.box ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:var(--space-1)}
+
+/* Bag drawer */
+.scrimbg{position:fixed;inset:0;z-index:40;background:var(--scrim-soft)}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:50;width:min(28rem,100%);background:var(--bg-base);box-shadow:var(--shadow-overlay);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);transform:translateX(100%);transition:transform var(--duration-slow) var(--ease-out);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-6);border-bottom:var(--border-width) solid var(--bg-raised)}
+.dhead h2{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:var(--text-xl)}
+.x{width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-full);border:0;background:var(--bg-raised);color:var(--forest);cursor:pointer;display:grid;place-items:center}
+.dbody{flex:1;overflow-y:auto;padding:var(--space-4) var(--space-6);display:flex;flex-direction:column;gap:var(--space-4)}
+.line{display:grid;grid-template-columns:4rem minmax(0,1fr) auto;gap:var(--space-3);align-items:center}
+.line img{width:4rem;height:4rem;object-fit:cover;border-radius:var(--radius-sm)}
+.line .nm{font-weight:var(--weight-bold);line-height:1.2}
+.line .meta{font-size:var(--text-sm);color:var(--text-secondary)}
+.qty{display:flex;align-items:center;gap:var(--space-1)}
+.qty button{width:2.25rem;height:2.25rem;border-radius:var(--radius-full);border:var(--border-width) solid var(--moss);background:transparent;color:var(--forest);font-weight:var(--weight-bold);cursor:pointer}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.empty{padding-block:var(--space-12);text-align:center;display:flex;flex-direction:column;gap:var(--space-4);align-items:center}
+.dfoot{padding:var(--space-4) var(--space-6);border-top:var(--border-width) solid var(--bg-raised);display:flex;flex-direction:column;gap:var(--space-3)}
+.sum{display:grid;grid-template-columns:1fr auto;gap:var(--space-1) var(--space-4);font-variant-numeric:tabular-nums;font-size:var(--text-sm)}
+.sum .save{color:var(--accent-text);font-weight:var(--weight-bold)}
+.sum .total{font-size:var(--text-lg);font-weight:var(--weight-bold);padding-top:var(--space-2);border-top:var(--border-width) solid var(--bg-raised)}
+.coderow{display:flex;gap:var(--space-2)}
+.coderow input{flex:1;min-width:0;font:inherit;text-transform:uppercase;border:var(--border-width) solid var(--moss);border-radius:var(--radius-sm);padding:var(--space-2) var(--space-3);min-height:var(--touch-min);background:var(--bg-base);color:var(--forest)}
+.coderow button{min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-sm);border:var(--border-width) solid var(--forest);background:transparent;color:var(--forest);font-weight:var(--weight-bold);cursor:pointer}
+.msg{font-size:var(--text-sm);font-weight:var(--weight-medium)}
+.msg.ok{color:var(--forest)}
+.msg.err{color:var(--danger)}
+.ful{display:flex;flex-direction:column;gap:var(--space-2)}
+.ful label{display:flex;gap:var(--space-3);align-items:center;min-height:var(--touch-min);padding:var(--space-2) var(--space-3);border:var(--border-width) solid var(--bg-raised);border-radius:var(--radius-sm);cursor:pointer;font-size:var(--text-sm)}
+.ful input{accent-color:var(--forest);width:1.1rem;height:1.1rem}
+.ful label:has(input:checked){border-color:var(--forest)}
+form.co{display:flex;flex-direction:column;gap:var(--space-3)}
+form.co .f{display:flex;flex-direction:column;gap:var(--space-1)}
+form.co label{font-size:var(--text-sm);font-weight:var(--weight-bold)}
+form.co input,form.co textarea{font:inherit;border:var(--border-width) solid var(--moss);border-radius:var(--radius-sm);padding:var(--space-3);min-height:var(--touch-min);background:var(--bg-base);color:var(--forest);width:100%}
+.done{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-6);border-radius:var(--radius-md);background:var(--bg-raised)}
+.done h3{font-family:var(--font-display);font-weight:var(--weight-regular);text-transform:uppercase;font-size:var(--text-xl);color:var(--accent-text)}
+
+footer{background:var(--bg-deep);color:var(--text-on-dark);padding-block:var(--space-12) calc(var(--space-12) + env(safe-area-inset-bottom,0px));margin-top:var(--space-16)}
+footer .cols{display:flex;flex-wrap:wrap;gap:var(--space-8);justify-content:space-between}
+footer a{text-decoration:none}
+footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--leading-display);margin-bottom:var(--space-8)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="index.html" aria-label="PRESSED home">
+      <span class="bolt" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+      <b>PRESSED</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="hide-sm" href="index.html#parties">Parties</a>
+      <a class="hide-sm" href="index.html#crew">Crew orders</a>
+      <a href="shop.html" aria-current="page">Shop</a>
+      <button class="bagbtn" id="openBag" type="button" aria-haspopup="dialog" aria-controls="bag">
+        Bag <span class="bagcount" id="bagCount">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap shophead" aria-labelledby="shop-title">
+    <p class="eyebrow">The shop · pick up at a pop-up or local drop-off</p>
+    <h1 class="display" id="shop-title">Shop the bar.</h1>
+    <div class="offers">
+      <div class="offer dark"><b>Full Press set</b><span>Nail set + tee + hat in one order: <strong>15% off</strong> all three. Applied in your bag.</span></div>
+      <div class="offer"><b>Launch prices</b><span>Everyday Nude, Lagoon and Violet sets are marked down while launch stock lasts.</span></div>
+      <div class="offer"><b>First order</b><span>Code <span class="code">PRESSED10</span> takes 10% off your first order.</span></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="tabs" role="group" aria-label="Filter products">
+      <button class="tab" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="tab" type="button" data-f="nails" aria-pressed="false">Nail sets</button>
+      <button class="tab" type="button" data-f="tees" aria-pressed="false">Tees</button>
+      <button class="tab" type="button" data-f="hats" aria-pressed="false">Hats</button>
+    </div>
+  </div>
+
+  <section class="wrap group" id="nails" data-cat="nails" aria-labelledby="nails-title">
+    <h2 class="display" id="nails-title">Press-on nail sets</h2>
+    <p class="intro muted">Hand-finished sets of 24 nails in 12 sizes, so they fit without a salon. Every set comes with glue, adhesive tabs, a file, a cuticle stick and a prep pad.</p>
+    <div class="grid" data-grid="nails"></div>
+    <div class="box" style="margin-top:var(--space-12)">
+      <img src="media/shop/whats-in-the-box.jpg" alt="Open PRESSED nail kit: tray of nails, file, cuticle stick and prep pad" width="800" height="800" loading="lazy">
+      <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+        <p class="eyebrow">In every box</p>
+        <h3 class="display" style="font-size:var(--text-2xl);color:var(--accent)">Not sure of your size?</h3>
+        <p>Leave the size on <strong>"Not sure: send a sizing kit"</strong>. We send blank sizing nails first, you text us your numbers, then we press your set to fit.</p>
+        <ul class="small"><li>Wear 1–2 weeks with glue, a few days with tabs</li><li>Reusable with care</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap group" id="tees" data-cat="tees" aria-labelledby="tees-title">
+    <h2 class="display" id="tees-title">Tees</h2>
+    <p class="intro muted">Heavyweight cotton, heat-pressed to order. Add your name or date to make it yours.</p>
+    <div class="grid" data-grid="tees"></div>
+  </section>
+
+  <section class="wrap group" id="hats" data-cat="hats" aria-labelledby="hats-title">
+    <h2 class="display" id="hats-title">Hats</h2>
+    <p class="intro muted">Statement hats ready to wear. Want to build your own with patches? Do it live at a pop-up or party.</p>
+    <div class="grid" data-grid="hats"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big display" aria-hidden="true">Get pressed.</p>
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:var(--space-2)"><b>pressedva.com</b><span>hello@pressedva.com</span></div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-2)"><a href="index.html#book">Book a party</a><a href="index.html#quote">Crew orders</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="scrimbg" id="scrim" hidden></div>
+<aside class="drawer" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" aria-hidden="true">
+  <div class="dhead">
+    <h2 id="bag-title">Your bag</h2>
+    <button class="x" id="closeBag" type="button" aria-label="Close bag"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="dbody" id="bagBody"></div>
+  <div class="dfoot" id="bagFoot"></div>
+</aside>
+<p class="sr" id="live" aria-live="polite"></p>
+
+<script>
+/* Where order requests go once the site is live (same service as the booking form). Empty = on-screen only. */
+var FORM_ENDPOINT = "";
+
+/* Prices in cents. "was" = regular price when a set is marked down. Edit here, nowhere else. */
+var PRODUCTS = [
+  { id: "everyday-nude", cat: "nails", name: "Everyday Nude", desc: "Soft nude almond with gold flecks. Goes with everything.", price: 2200, was: 2800, img: "everyday-nude.jpg" },
+  { id: "oxblood", cat: "nails", name: "Oxblood", desc: "Deep glossy wine, long square. The one from the video.", price: 3200, img: "oxblood.jpg" },
+  { id: "ember", cat: "nails", name: "Ember", desc: "Amber and caramel marble, short squoval.", price: 4800, img: "ember.jpg" },
+  { id: "lagoon", cat: "nails", name: "Lagoon", desc: "Clear almond with aqua swirls.", price: 3900, was: 4800, img: "lagoon.jpg" },
+  { id: "petal", cat: "nails", name: "Petal", desc: "Blush with hand-painted cherry blossom.", price: 5200, img: "petal.jpg" },
+  { id: "verdant", cat: "nails", name: "Verdant", desc: "Milky white with painted ferns.", price: 5200, img: "verdant.jpg" },
+  { id: "porcelain", cat: "nails", name: "Porcelain", desc: "Blue-and-white china pattern, short square.", price: 5600, img: "porcelain.jpg" },
+  { id: "violet", cat: "nails", name: "Violet", desc: "Lilac coffin with wisteria and gold leaf.", price: 4600, was: 5600, img: "violet.jpg" },
+  { id: "classic-tee", cat: "tees", name: "PRESSED Classic Tee", desc: "Black tee with the PRESSED wordmark, pressed to order.", price: 2800, img: "classic-tee.jpg" },
+  { id: "name-tee", cat: "tees", name: "Custom Name Tee", desc: "Your name, date or crew name, pressed to order. Add the text at checkout.", price: 3400, img: "name-tee.jpg" },
+  { id: "crown-trucker", cat: "hats", name: "Crown Trucker", desc: "Black trucker with gold rhinestone and bead front. Adjustable snapback.", price: 5800, img: "crown-trucker.jpg" }
+];
+var SIZES = {
+  nails: ["Not sure: send a sizing kit", "XS", "S", "M", "L"],
+  tees: ["S", "M", "L", "XL", "2XL", "3XL"],
+  hats: ["One size"]
+};
+var BUNDLE_RATE = 0.15;              /* Full Press: one nail set + tee + hat */
+var CODES = { PRESSED10: 0.10 };     /* first-order code */
+var DROPOFF_FEE = 500;               /* local drop-off, Stafford + Fredericksburg */
+
+var live = document.getElementById('live');
+function money(c){ return '$' + (c / 100).toFixed(c % 100 ? 2 : 0); }
+function byId(id){ return PRODUCTS.filter(function(p){ return p.id === id; })[0]; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); }
+
+/* ---------- Bag state (remembered on this device only) ---------- */
+var state = { lines: [], code: '', ful: 'pickup' };
+try { var saved = JSON.parse(localStorage.getItem('pressed-bag') || 'null'); if (saved && saved.lines) state = saved; } catch (e) {}
+function save(){ try { localStorage.setItem('pressed-bag', JSON.stringify(state)); } catch (e) {} }
+
+/* ---------- Render products ---------- */
+['nails', 'tees', 'hats'].forEach(function(cat){
+  var grid = document.querySelector('[data-grid="' + cat + '"]');
+  grid.innerHTML = PRODUCTS.filter(function(p){ return p.cat === cat; }).map(function(p){
+    var off = p.was ? Math.round((1 - p.price / p.was) * 100) : 0;
+    var opts = SIZES[cat].map(function(s){ return '<option>' + esc(s) + '</option>'; }).join('');
+    return '<article class="card">' +
+      '<div class="ph">' + (off ? '<span class="badge">' + off + '% off</span>' : '') +
+      '<img src="media/shop/' + p.img + '" alt="' + esc(p.name) + ' ' + (cat === 'nails' ? 'press-on nail set' : cat === 'tees' ? 'tee' : 'hat') + '" width="800" height="800" loading="lazy"></div>' +
+      '<h3>' + esc(p.name) + '</h3>' +
+      '<p class="desc">' + esc(p.desc) + '</p>' +
+      '<p class="price' + (p.was ? ' sale' : '') + '"><span class="now">' + money(p.price) + '</span>' + (p.was ? '<s aria-label="was ' + money(p.was) + '">' + money(p.was) + '</s>' : '') + '</p>' +
+      '<div class="opts">' + (SIZES[cat].length > 1 ? '<label class="sr" for="sz-' + p.id + '">Size for ' + esc(p.name) + '</label><select id="sz-' + p.id + '">' + opts + '</select>' : '<span class="small muted" style="flex:1">One size</span>') +
+      '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button></div>' +
+    '</article>';
+  }).join('');
+});
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-add]'); if (!b) return;
+  var p = byId(b.getAttribute('data-add'));
+  var sel = document.getElementById('sz-' + p.id);
+  var size = sel ? sel.value : 'One size';
+  var line = state.lines.filter(function(l){ return l.id === p.id && l.size === size; })[0];
+  if (line) line.qty++; else state.lines.push({ id: p.id, size: size, qty: 1 });
+  save(); renderBag();
+  b.textContent = 'Added'; b.classList.add('done');
+  setTimeout(function(){ b.textContent = 'Add to bag'; b.classList.remove('done'); }, 1400);
+  live.textContent = p.name + ', ' + size + ', added to bag.';
+});
+
+/* ---------- Filters ---------- */
+var tabs = [].slice.call(document.querySelectorAll('.tab'));
+function filter(f){
+  tabs.forEach(function(t){ t.setAttribute('aria-pressed', String(t.getAttribute('data-f') === f)); });
+  document.querySelectorAll('[data-cat]').forEach(function(s){ s.hidden = !(f === 'all' || s.getAttribute('data-cat') === f); });
+}
+tabs.forEach(function(t){ t.addEventListener('click', function(){ filter(t.getAttribute('data-f')); }); });
+var h = (location.hash || '').slice(1); if (['nails', 'tees', 'hats'].indexOf(h) > -1) filter(h);
+
+/* ---------- Totals ---------- */
+function totals(){
+  var sub = 0, units = { nails: [], tees: [], hats: [] };
+  state.lines.forEach(function(l){
+    var p = byId(l.id); if (!p) return;
+    sub += p.price * l.qty;
+    for (var i = 0; i < l.qty; i++) units[p.cat].push(p.price);
+  });
+  Object.keys(units).forEach(function(k){ units[k].sort(function(a, b){ return a - b; }); });
+  var sets = Math.min(units.nails.length, units.tees.length, units.hats.length), base = 0;
+  for (var i = 0; i < sets; i++) base += units.nails[i] + units.tees[i] + units.hats[i];
+  var bundle = Math.round(base * BUNDLE_RATE);
+  var rate = CODES[state.code] || 0;
+  var code = Math.round((sub - bundle) * rate);
+  var fee = state.ful === 'dropoff' && sub > 0 ? DROPOFF_FEE : 0;
+  var count = state.lines.reduce(function(n, l){ return n + l.qty; }, 0);
+  var saleSave = state.lines.reduce(function(n, l){ var p = byId(l.id); return n + (p && p.was ? (p.was - p.price) * l.qty : 0); }, 0);
+  return { sub: sub, sets: sets, bundle: bundle, code: code, fee: fee, total: sub - bundle - code + fee, count: count, saleSave: saleSave };
+}
+
+/* ---------- Bag drawer ---------- */
+var bag = document.getElementById('bag'), scrim = document.getElementById('scrim');
+var body = document.getElementById('bagBody'), foot = document.getElementById('bagFoot');
+var lastFocus = null, view = 'bag';
+function openBag(){ lastFocus = document.activeElement; view = 'bag'; renderBag(); scrim.hidden = false; bag.classList.add('open'); bag.setAttribute('aria-hidden', 'false'); document.getElementById('closeBag').focus(); }
+function closeBag(){ bag.classList.remove('open'); bag.setAttribute('aria-hidden', 'true'); scrim.hidden = true; if (lastFocus) lastFocus.focus(); }
+document.getElementById('openBag').addEventListener('click', openBag);
+document.getElementById('closeBag').addEventListener('click', closeBag);
+scrim.addEventListener('click', closeBag);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && bag.classList.contains('open')) closeBag(); });
+
+function renderBag(){
+  var t = totals();
+  document.getElementById('bagCount').textContent = t.count;
+  if (view === 'done') return;
+  if (!state.lines.length) {
+    body.innerHTML = '<div class="empty"><p class="display" style="font-size:var(--text-xl)">Your bag is empty</p><p class="muted small">Start with a nail set. Add a tee and a hat to unlock 15% off the set.</p><button class="btn" type="button" data-close>Shop nail sets</button></div>';
+    foot.innerHTML = ''; return;
+  }
+  if (view === 'checkout') return renderCheckout(t);
+  body.innerHTML = state.lines.map(function(l, i){
+    var p = byId(l.id); if (!p) return '';
+    return '<div class="line"><img src="media/shop/' + p.img + '" alt="" width="64" height="64">' +
+      '<div><div class="nm">' + esc(p.name) + '</div><div class="meta">' + esc(l.size) + ' · ' + money(p.price) + '</div></div>' +
+      '<div class="qty"><button type="button" data-q="' + i + '" data-d="-1" aria-label="Remove one ' + esc(p.name) + '">−</button><span>' + l.qty + '</span><button type="button" data-q="' + i + '" data-d="1" aria-label="Add one ' + esc(p.name) + '">+</button></div></div>';
+  }).join('') + (t.sets ? '' : '<p class="small muted">Add ' + missing() + ' to get 15% off a Full Press set.</p>');
+  foot.innerHTML = summary(t) +
+    '<div class="coderow"><label class="sr" for="codeIn">Discount code</label><input id="codeIn" placeholder="Discount code" value="' + esc(state.code) + '" autocomplete="off"><button type="button" id="applyCode">Apply</button></div>' +
+    '<p class="msg" id="codeMsg" role="status"></p>' +
+    '<div class="ful" role="radiogroup" aria-label="How you get it">' +
+      '<label><input type="radio" name="ful" value="pickup"' + (state.ful === 'pickup' ? ' checked' : '') + '> Pick up at the next pop-up: free</label>' +
+      '<label><input type="radio" name="ful" value="dropoff"' + (state.ful === 'dropoff' ? ' checked' : '') + '> Local drop-off, Stafford + Fredericksburg: ' + money(DROPOFF_FEE) + '</label></div>' +
+    '<button class="btn pink block" type="button" id="toCheckout">Reserve my order · ' + money(t.total) + '</button>';
+}
+function missing(){
+  var have = { nails: 0, tees: 0, hats: 0 };
+  state.lines.forEach(function(l){ var p = byId(l.id); if (p) have[p.cat] += l.qty; });
+  var need = []; if (!have.nails) need.push('a nail set'); if (!have.tees) need.push('a tee'); if (!have.hats) need.push('a hat');
+  return need.join(' and ');
+}
+function summary(t){
+  return '<div class="sum"><span>Subtotal</span><span>' + money(t.sub) + '</span>' +
+    (t.saleSave ? '<span class="save">Launch prices (already in subtotal)</span><span class="save">' + money(t.saleSave) + ' saved</span>' : '') +
+    (t.bundle ? '<span class="save">Full Press set' + (t.sets > 1 ? ' ×' + t.sets : '') + ' (15%)</span><span class="save">−' + money(t.bundle) + '</span>' : '') +
+    (t.code ? '<span class="save">Code ' + esc(state.code) + ' (10%)</span><span class="save">−' + money(t.code) + '</span>' : '') +
+    (t.fee ? '<span>Local drop-off</span><span>' + money(t.fee) + '</span>' : '') +
+    '<span class="total">Total</span><span class="total">' + money(t.total) + '</span></div>';
+}
+function renderCheckout(t){
+  body.innerHTML = '<button class="btn ghost" type="button" id="backToBag" style="align-self:flex-start">Back to bag</button>' +
+    '<p class="small">Reserve now, pay when you get it: at the pop-up, or by a secure pay link we email for drop-off. We confirm every order from hello@pressedva.com within one day.</p>' +
+    '<form class="co" id="coForm" novalidate>' +
+      '<div class="f"><label for="co-name">Your name</label><input id="co-name" name="name" autocomplete="name" required></div>' +
+      '<div class="f"><label for="co-email">Email</label><input id="co-email" name="email" type="email" autocomplete="email" required></div>' +
+      '<div class="f"><label for="co-phone">Phone (for pickup texts)</label><input id="co-phone" name="phone" type="tel" autocomplete="tel"></div>' +
+      (state.ful === 'dropoff' ? '<div class="f"><label for="co-addr">Drop-off address</label><input id="co-addr" name="address" autocomplete="street-address" required></div>' : '') +
+      '<div class="f"><label for="co-notes">Name or text for custom tees, other notes</label><textarea id="co-notes" name="notes" rows="3"></textarea></div>' +
+      '<p class="msg err" id="coErr" role="alert"></p>' +
+    '</form>';
+  foot.innerHTML = summary(t) + '<button class="btn pink block" type="submit" form="coForm" id="placeBtn">Reserve my order · ' + money(t.total) + '</button>';
+}
+
+body.addEventListener('click', function(e){
+  var q = e.target.closest('[data-q]');
+  if (q) {
+    var l = state.lines[+q.getAttribute('data-q')]; l.qty += +q.getAttribute('data-d');
+    if (l.qty < 1) state.lines.splice(+q.getAttribute('data-q'), 1);
+    save(); renderBag(); return;
+  }
+  if (e.target.closest('[data-close]')) { closeBag(); filter('nails'); document.getElementById('nails').scrollIntoView(); return; }
+  if (e.target.closest('#backToBag')) { view = 'bag'; renderBag(); }
+});
+foot.addEventListener('click', function(e){
+  if (e.target.id === 'applyCode') {
+    var v = document.getElementById('codeIn').value.trim().toUpperCase();
+    var msg = document.getElementById('codeMsg');
+    if (!v) { state.code = ''; save(); renderBag(); return; }
+    if (CODES[v]) { state.code = v; save(); renderBag(); document.getElementById('codeMsg').className = 'msg ok'; document.getElementById('codeMsg').textContent = v + ' applied: 10% off.'; }
+    else { msg.className = 'msg err'; msg.textContent = '"' + v + '" isn\'t a working code. Check the spelling, or try PRESSED10.'; }
+  }
+  if (e.target.id === 'toCheckout') { view = 'checkout'; renderBag(); var f = document.getElementById('co-name'); if (f) f.focus(); }
+});
+foot.addEventListener('change', function(e){ if (e.target.name === 'ful') { state.ful = e.target.value; save(); renderBag(); } });
+
+document.addEventListener('submit', function(e){
+  if (e.target.id !== 'coForm') return;
+  e.preventDefault();
+  var form = e.target, err = document.getElementById('coErr');
+  var bad = [].slice.call(form.querySelectorAll('[required]')).filter(function(i){ return !i.checkValidity(); });
+  if (bad.length) {
+    err.textContent = bad[0].type === 'email' && bad[0].value ? 'Check the email address. It needs an @ and a domain, like name@gmail.com.' : 'Fill in ' + bad.map(function(i){ return document.querySelector('label[for="' + i.id + '"]').textContent; }).join(', ') + ' to reserve.';
+    bad[0].focus(); return;
+  }
+  var t = totals();
+  var lines = state.lines.map(function(l){ var p = byId(l.id); return l.qty + ' × ' + p.name + ' (' + l.size + ') ' + money(p.price * l.qty); });
+  var fd = new FormData(form);
+  fd.append('order', lines.join('\n'));
+  fd.append('fulfillment', state.ful === 'dropoff' ? 'Local drop-off' : 'Pick up at pop-up');
+  fd.append('discounts', [t.bundle ? 'Full Press −' + money(t.bundle) : '', t.code ? state.code + ' −' + money(t.code) : ''].filter(Boolean).join(', ') || 'none');
+  fd.append('total', money(t.total));
+  fd.append('_subject', 'Shop order from pressedva.com');
+  var finish = function(){
+    view = 'done';
+    body.innerHTML = '<div class="done" tabindex="-1" id="doneBox"><h3>Order reserved</h3><p>' + lines.map(esc).join('<br>') + '</p><p><strong>Total ' + money(t.total) + '</strong></p><p class="small">We confirm from hello@pressedva.com within one day' + (state.ful === 'dropoff' ? ' with your pay link and drop-off time.' : ' with the next pop-up date.') + '</p></div>';
+    foot.innerHTML = '<button class="btn block" type="button" id="keepShopping">Keep shopping</button>';
+    state.lines = []; state.code = ''; save(); document.getElementById('bagCount').textContent = '0';
+    document.getElementById('doneBox').focus(); live.textContent = 'Order reserved.';
+  };
+  if (!FORM_ENDPOINT) return finish();
+  var btn = document.getElementById('placeBtn'); btn.disabled = true; btn.textContent = 'Sending…';
+  fetch(FORM_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+    .then(function(r){ if (!r.ok) throw new Error(r.status); finish(); })
+    .catch(function(){ btn.disabled = false; btn.textContent = 'Reserve my order · ' + money(t.total); err.textContent = "That didn't send. Check your connection and try again, or email hello@pressedva.com."; });
+});
+foot.addEventListener('click', function(e){ if (e.target.id === 'keepShopping') { view = 'bag'; closeBag(); renderBag(); } });
+
+renderBag();
+</script>
+</body>
+</html>
