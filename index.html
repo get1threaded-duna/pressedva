@@ -89,7 +89,7 @@ section.block{padding-block:var(--space-24)}
 .pack li::before{content:"";flex:none;width:.5em;height:.5em;border-radius:var(--radius-full);background:var(--accent);transform:translateY(-.1em)}
 .pack.star li::before{background:var(--bubble)}
 .price{font-family:var(--font-display);font-size:var(--text-xl);margin-top:auto}
-.flag{position:absolute;top:var(--space-4);right:var(--space-4);font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;background:var(--bubble);color:var(--forest);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full)}
+.flag{align-self:flex-start;font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;background:var(--bubble);color:var(--forest);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full)}
 
 /* Forms */
 .formcard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:var(--space-12);padding:clamp(1.5rem,5vw,4rem);border-radius:var(--radius-lg);border:var(--border-width) solid var(--border-strong)}
@@ -231,39 +231,42 @@ footer a:hover{text-decoration:underline}
         <article class="pack reveal" data-tilt>
           <h3 class="display">Mini Press</h3>
           <ul>
-            <li>Up to 10 guests</li>
+            <li>Up to 8 guests</li>
             <li>Pick one bar: nails, tees or hats</li>
             <li>90 minutes, set up at your place</li>
           </ul>
-          <p class="price">From $[price]</p>
+          <p class="price">$395</p>
         </article>
         <article class="pack star reveal" data-tilt>
-          <span class="flag">Most booked</span>
+          <span class="flag">Signature party</span>
           <h3 class="display">Full Press</h3>
           <ul>
-            <li>Up to 20 guests</li>
-            <li>All three bars: nails, tees and hats</li>
-            <li>2 hours, birthday guest goes first</li>
+            <li>10 guests included, up to 20 total</li>
+            <li>All three bars open: every guest makes one piece to keep</li>
+            <li>Birthday guest gets the full set: nails, tee and hat</li>
+            <li>2 hours, set up and cleaned up at your place</li>
           </ul>
-          <p class="price">From $[price]</p>
+          <p class="price">$695 <span class="small" style="font-family:var(--font-body)">+ $40 per extra guest</span></p>
         </article>
         <article class="pack reveal" data-tilt>
           <h3 class="display">Crowd Press</h3>
           <ul>
-            <li>25 guests and up</li>
-            <li>Schools, churches, offices, block parties</li>
-            <li>Custom time and bar mix</li>
+            <li>For schools, churches, offices and community events</li>
+            <li>Every guest makes one piece: $34 each for 25–49, $30 for 50–99, $27 for 100+</li>
+            <li>Up to 3 hours, $850 minimum</li>
+            <li>Your logo on patches or tees: ask for a quote</li>
           </ul>
-          <p class="price">Custom quote</p>
+          <p class="price">Let's talk <span class="small" style="font-family:var(--font-body)">from $27 per guest</span></p>
         </article>
       </div>
+      <p class="small muted reveal" style="margin-top:calc(-1 * var(--space-12));margin-bottom:var(--space-16)">A deposit holds your date: $100 for Mini and Full Press, 25% for Crowd Press, applied to your total. Travel is free within 15 miles of Stafford (22405), $45 for 16–30 miles, $75 for 31–50 miles.</p>
 
       <div class="formcard reveal" id="book">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <p class="eyebrow">Book a party</p>
-          <h3 class="display">Hold your date</h3>
+          <h3 class="display">Lock in your date</h3>
           <p class="muted">Send your date and guest count. We reply within one day with a price and a secure deposit link. The deposit holds your date.</p>
-          <p class="small muted">Questions first? Email <span class="addr">hello@pressedva.com</span></p>
+          <p class="small muted">Got a question, moe? Hit us at <span class="addr">hello@pressedva.com</span></p>
         </div>
         <div>
           <form id="partyForm" novalidate data-kind="Party booking">
