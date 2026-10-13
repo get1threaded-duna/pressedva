@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="design/tokens.css">
+<link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32.png">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -34,9 +36,13 @@ h1,h2,h3,p{margin:0}
 /* Header */
 .top{position:sticky;top:0;z-index:20;background:var(--bg-base);padding-top:env(safe-area-inset-top,0px)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}
-.mark{display:flex;align-items:center;gap:var(--space-3);text-decoration:none}
-.bolt{width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-full);background:var(--accent);display:grid;place-items:center;color:var(--chalk);flex:none}
-.mark b{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--text-lg);letter-spacing:.02em}
+.mark{display:flex;align-items:center;text-decoration:none;padding-block:var(--space-1)}
+.mark{gap:var(--space-2)}
+.mark img{display:block;height:3.25rem;width:auto}
+.mark img.word{height:1.75rem}
+.mark,.nav .btn{flex:none;white-space:nowrap}
+@media (max-width:400px){.mark img{height:2.5rem}.mark img.word{height:1.375rem}}
+@media (max-width:360px){.nav .btn{padding-inline:var(--space-3);font-size:var(--text-sm)}}
 .nav{display:flex;align-items:center;gap:var(--space-6);font-weight:var(--weight-medium)}
 .nav a{text-decoration:none;padding-block:var(--space-2)}
 .nav a:not(.btn):hover{color:var(--accent-text);text-decoration:underline;text-underline-offset:.3em}
@@ -163,6 +169,15 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:var
 /* Footer */
 footer{background:var(--bg-deep);color:var(--text-on-dark);padding-block:var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom,0px))}
 footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--leading-display)}
+.dates .kick{display:block;font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--accent-text);margin-bottom:var(--space-1)}
+.bleed{margin:0;width:100%}
+.bleed img{display:block;width:100%;height:auto}
+.foot-logo{display:block;height:7rem;width:auto;margin-bottom:var(--space-6)}
+footer{overflow:hidden}
+footer .big{--p:1}
+footer .big span{display:inline-block;will-change:transform}
+footer .big .l1{transform:translateX(calc((var(--p) - 1) * 60%))}
+footer .big .l2{transform:translateX(calc((1 - var(--p)) * 45%));-webkit-text-stroke:var(--border-width) var(--accent);color:var(--accent);color:color-mix(in srgb,var(--accent) calc(var(--p) * 100%),transparent)}
 footer .cols{display:flex;flex-wrap:wrap;gap:var(--space-8);justify-content:space-between;margin-top:var(--space-8)}
 footer a{text-decoration:none}
 footer a:hover{text-decoration:underline}
@@ -177,10 +192,7 @@ footer a:hover{text-decoration:underline}
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#top" aria-label="PRESSED home">
-      <span class="bolt" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
-      <b>PRESSED</b>
-    </a>
+    <a class="mark" href="#top" aria-label="PressedVA home"><img src="media/mark.png" width="250" height="250" alt=""><img class="word" src="media/wordmark.png" width="348" height="82" alt=""></a>
     <nav class="nav" aria-label="Main">
       <a href="#parties">Parties</a>
       <a href="#crew">Crew orders</a>
@@ -298,6 +310,10 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
+  <figure class="bleed">
+    <img src="media/crew-1536.jpg" srcset="media/crew-800.jpg 800w, media/crew-1536.jpg 1536w" sizes="100vw" width="1536" height="1024" loading="lazy" decoding="async" alt="Six friends on a stoop in PRESSED tees and PVA hats, showing off their press-on nails">
+  </figure>
+
   <section class="block crew" id="crew" aria-labelledby="crew-title">
     <div class="wrap">
       <div class="head reveal">
@@ -382,9 +398,9 @@ footer a:hover{text-decoration:underline}
         <h2 class="display" id="find-title">Next pop-ups</h2>
       </div>
       <ul class="dates reveal">
-        <li><span class="d">[Date]</span><span class="w">[Event name]</span><span class="muted">[Place], Stafford</span></li>
-        <li><span class="d">[Date]</span><span class="w">[Event name]</span><span class="muted">[Place], Fredericksburg</span></li>
-        <li><span class="d">Sat Nov 28</span><span class="w">Small Business Saturday pop-up</span><span class="muted">[Place]</span></li>
+        <li><span class="d">Sat Oct 24</span><span class="w">Pumpkin Spice Crawl</span><span class="muted">3:00–7:00 PM</span></li>
+        <li><span class="d">Sat Oct 31</span><span class="w"><small class="kick">12th annual</small>Harvest Festival Fly-In</span><span class="muted">10:00 AM · Shannon Airport (EZF)</span></li>
+        <li><span class="d">Sat Nov 28</span><span class="w">SMB Start-Up Saturday Pop-Up</span><span class="muted">[Place]</span></li>
       </ul>
     </div>
   </section>
@@ -392,7 +408,8 @@ footer a:hover{text-decoration:underline}
 
 <footer>
   <div class="wrap">
-    <p class="big display" aria-hidden="true">Dream it. Press it.</p>
+    <img class="foot-logo" src="media/logo.png" width="352" height="303" alt="PressedVa" loading="lazy">
+    <p class="big display" id="bigline" aria-hidden="true"><span class="l1">Dream it.</span> <span class="l2">Press it.</span></p>
     <div class="cols">
       <div style="display:flex;flex-direction:column;gap:var(--space-2)">
         <b>pressedva.com</b>
@@ -415,6 +432,20 @@ document.documentElement.classList.add('js');
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var live = document.getElementById('live');
 function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+/* ---------- Footer line: slides in left to right, "Press it." fills as you scroll ---------- */
+(function(){
+  var big=document.getElementById('bigline'); if(!big||reduce) return;
+  var foot=big.closest('footer'), ticking=false;
+  function upd(){
+    ticking=false;
+    var r=foot.getBoundingClientRect(), vh=window.innerHeight;
+    var p=Math.min(1,Math.max(0,(vh-r.top)/(Math.min(r.height,vh)*0.9)));
+    big.style.setProperty('--p',p.toFixed(3));
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(upd);} },{passive:true});
+  window.addEventListener('resize',upd); upd();
+})();
 
 /* ---------- Reveal on scroll (content visible by default) ---------- */
 (function(){

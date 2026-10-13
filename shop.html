@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="design/tokens.css">
+<link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32.png">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -34,14 +36,18 @@ h1,h2,h3,p{margin:0}
 /* Header */
 .top{position:sticky;top:0;z-index:20;background:var(--bg-base);padding-top:env(safe-area-inset-top,0px);border-bottom:var(--border-width) solid var(--bg-raised)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}
-.mark{display:flex;align-items:center;gap:var(--space-3);text-decoration:none}
-.bolt{width:var(--touch-min);height:var(--touch-min);border-radius:var(--radius-full);background:var(--accent);display:grid;place-items:center;color:var(--chalk);flex:none}
-.mark b{font-family:var(--font-display);font-weight:var(--weight-regular);font-size:var(--text-lg)}
+.mark{display:flex;align-items:center;text-decoration:none;padding-block:var(--space-1)}
+.mark{gap:var(--space-2)}
+.mark img{display:block;height:3.25rem;width:auto}
+.mark img.word{height:1.75rem}
+.mark,.nav .btn{flex:none;white-space:nowrap}
+@media (max-width:400px){.mark img{height:2.5rem}.mark img.word{height:1.375rem}}
 .nav{display:flex;align-items:center;gap:var(--space-6);font-weight:var(--weight-medium)}
 .nav a{text-decoration:none;padding-block:var(--space-2)}
 .nav a[aria-current]{color:var(--accent-text);text-decoration:underline;text-underline-offset:.3em}
 .nav a:not(.btn):hover{color:var(--accent-text)}
 @media (max-width:760px){.nav .hide-sm{display:none}}
+@media (max-width:370px){.nav a[aria-current]{display:none}}
 .bagbtn{position:relative;display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--touch-min);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:var(--border-width) solid var(--forest);background:var(--forest);color:var(--chalk);font:var(--weight-bold) var(--text-sm)/1 var(--font-body);cursor:pointer}
 .bagcount{min-width:1.5rem;height:1.5rem;padding-inline:var(--space-1);border-radius:var(--radius-full);background:var(--bubble);color:var(--forest);display:grid;place-items:center;font-size:var(--text-xs)}
 
@@ -137,10 +143,7 @@ footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--l
 
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="index.html" aria-label="PRESSED home">
-      <span class="bolt" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
-      <b>PRESSED</b>
-    </a>
+    <a class="mark" href="index.html" aria-label="PressedVA home"><img src="media/mark.png" width="250" height="250" alt=""><img class="word" src="media/wordmark.png" width="348" height="82" alt=""></a>
     <nav class="nav" aria-label="Main">
       <a class="hide-sm" href="index.html#parties">Parties</a>
       <a class="hide-sm" href="index.html#crew">Crew orders</a>
