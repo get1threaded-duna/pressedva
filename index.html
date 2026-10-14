@@ -169,6 +169,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{border-color:var
 /* Footer */
 footer{background:var(--bg-deep);color:var(--text-on-dark);padding-block:var(--space-16) calc(var(--space-12) + env(safe-area-inset-bottom,0px))}
 footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--leading-display)}
+.dates a.map{white-space:nowrap;color:var(--accent-text);text-decoration:underline;text-underline-offset:.2em;text-decoration-thickness:1px}
+.dates a.map:hover{text-decoration-thickness:2px}
 .dates .kick{display:block;font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--accent-text);margin-bottom:var(--space-1)}
 .bleed{margin:0;width:100%}
 .bleed img{display:block;width:100%;height:auto}
@@ -398,9 +400,9 @@ footer a:hover{text-decoration:underline}
         <h2 class="display" id="find-title">Next pop-ups</h2>
       </div>
       <ul class="dates reveal">
-        <li><span class="d">Sat Oct 24</span><span class="w">Pumpkin Spice Crawl</span><span class="muted">3:00–7:00 PM</span></li>
-        <li><span class="d">Sat Oct 31</span><span class="w"><small class="kick">12th annual</small>Harvest Festival Fly-In</span><span class="muted">10:00 AM · Shannon Airport (EZF)</span></li>
-        <li><span class="d">Sat Nov 28</span><span class="w">SMB Start-Up Saturday Pop-Up</span><span class="muted">[Place]</span></li>
+        <li><span class="d">Sat Oct 24</span><span class="w">Pumpkin Spice Crawl</span><span class="muted">3:00–7:00 PM · <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=601%20Caroline%20St%2C%20Fredericksburg%2C%20VA%2022401" target="_blank" rel="noopener" aria-label="Directions to FXBG City Center, 601 Caroline St (opens Google Maps)">FXBG City Center, 601 Caroline St</a></span></li>
+        <li><span class="d">Sat Oct 31</span><span class="w"><small class="kick">12th annual</small>Harvest Festival Fly-In</span><span class="muted">10:00 AM · <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Shannon%20Airport%2C%20Fredericksburg%2C%20VA" target="_blank" rel="noopener" aria-label="Directions to Shannon Airport (EZF) (opens Google Maps)">Shannon Airport (EZF)</a></span></li>
+        <li><span class="d">Sat Nov 28</span><span class="w">SMB Start-Up Saturday Pop-Up</span><span class="muted">Location TBA</span></li>
       </ul>
     </div>
   </section>
