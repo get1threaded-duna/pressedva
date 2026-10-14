@@ -137,6 +137,10 @@ footer{background:var(--bg-deep);color:var(--text-on-dark);padding-block:var(--s
 footer .cols{display:flex;flex-wrap:wrap;gap:var(--space-8);justify-content:space-between}
 footer a{text-decoration:none}
 footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--leading-display);margin-bottom:var(--space-8)}
+.social{display:flex;flex-wrap:wrap;gap:var(--space-1) var(--space-6)}
+.social a{display:inline-flex;align-items:center;gap:var(--space-2);min-height:var(--touch-min);text-decoration:none}
+.social a:hover span{text-decoration:underline}
+.social svg{width:1.25rem;height:1.25rem;flex:none}
 </style>
 </head>
 <body>
@@ -209,6 +213,7 @@ footer .big{font-size:var(--text-footer);color:var(--accent);line-height:var(--l
     <div class="cols">
       <div style="display:flex;flex-direction:column;gap:var(--space-2)"><b>pressedva.com</b><span>hello@pressedva.com</span></div>
       <div style="display:flex;flex-direction:column;gap:var(--space-2)"><a href="index.html#book">Book a party</a><a href="index.html#quote">Crew orders</a></div>
+      <div class="social" aria-label="PRESSED on social"><a href="https://www.tiktok.com/@pressedva" target="_blank" rel="noopener" aria-label="TikTok @pressedva"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.4 4.6 5 5"/></svg><span>@pressedva</span></a><a href="https://www.instagram.com/pressed.va/" target="_blank" rel="noopener" aria-label="Instagram @pressed.va"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>@pressed.va</span></a></div>
     </div>
   </div>
 </footer>
