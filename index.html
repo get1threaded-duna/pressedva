@@ -447,13 +447,13 @@ footer a:hover{text-decoration:underline}
               </div></div>
             <div class="field"><label for="c-qty">How many pieces?</label><input id="c-qty" name="quantity" type="number" min="12" inputmode="numeric" required></div>
             <div class="field"><label for="c-date">Needed by</label><input id="c-date" name="needed_by" type="date"></div>
-            <div class="field full"><label for="c-logo">Logo <span class="muted" style="font-weight:var(--weight-regular)">(optional, you can email it later)</span></label><input id="c-logo" name="logo" type="file" accept="image/*,.pdf,.ai,.svg"></div>
+            <div class="field full"><label for="c-logo">Logo <span class="muted" style="font-weight:var(--weight-regular)">(optional, to preview here. Email the file to hello@pressedva.com)</span></label><input id="c-logo" name="logo" type="file" accept="image/*,.pdf,.ai,.svg"></div>
             <div class="form-foot"><p class="err" id="crewForm-err" role="alert"></p><button class="btn light" type="submit">Get my quote</button></div>
           </form>
           <div class="done" id="crewForm-done" hidden tabindex="-1">
             <h4>Quote requested</h4>
             <dl class="sum" data-summary></dl>
-            <p class="small">We reply from <span class="addr">hello@pressedva.com</span> with a price and a proof.</p>
+            <p class="small">We reply from <span class="addr">hello@pressedva.com</span> with a price and a proof. Reply with your logo file if you have one.</p>
           </div>
         </div>
       </div>
@@ -527,7 +527,8 @@ footer a:hover{text-decoration:underline}
 
 <script>
 /* Where form requests go once the site is live. Leave empty in the preview. */
-var FORM_ENDPOINT = "";
+var FORM_ENDPOINT = "https://api.web3forms.com/submit";
+var FORM_KEY = "f25f604b-11e1-4165-a746-9d9a3ffec04a"; /* Web3Forms public access key: emails go to hello@pressedva.com */
 
 document.documentElement.classList.add('js');
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -673,9 +674,14 @@ function tok(name){ return getComputedStyle(document.documentElement).getPropert
       if (FORM_ENDPOINT) {
         var btn = form.querySelector('button[type="submit"]'); var label = btn.textContent;
         btn.disabled = true; btn.textContent = 'Sending…';
-        var payload = new FormData(form); payload.append('_subject', form.getAttribute('data-kind') + ' from pressedva.com');
+        var payload = new FormData(form);
+        var logo = payload.get('logo'); payload.delete('logo');
+        if (logo && logo.name) payload.append('logo_file', logo.name + ' (customer will email the file)');
+        payload.append('access_key', FORM_KEY);
+        payload.append('subject', form.getAttribute('data-kind') + ' from pressedva.com');
+        payload.append('from_name', 'PressedVa website');
         fetch(FORM_ENDPOINT, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' } })
-          .then(function(r){ if (!r.ok) throw new Error(r.status); finish(); })
+          .then(function(r){ return r.json().then(function(j){ if (!r.ok || !j.success) throw new Error(j.message || r.status); finish(); }); })
           .catch(function(){ btn.disabled = false; btn.textContent = label; err.textContent = "That didn't send. Check your connection and try again, or email hello@pressedva.com."; });
       } else { finish(); }
     });
